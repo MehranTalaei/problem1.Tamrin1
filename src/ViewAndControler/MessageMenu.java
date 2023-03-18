@@ -118,6 +118,9 @@ public class MessageMenu {
         String chatType = matcher.group("chatType");
         String id = matcher.group("id");
         boolean flag=true;
+        if (chatType.equalsIgnoreCase("private chat")) {
+            chatType = "privateChat";
+        }
         for (Chat currentUserChat : currentUser.getChats()) {
             if (currentUserChat.getId().equals(id)) {
                 if (currentUserChat.getClass().getSimpleName().equalsIgnoreCase(chatType)) {
