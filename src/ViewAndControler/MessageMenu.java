@@ -210,14 +210,14 @@ public class MessageMenu {
     private String joinChannel(Matcher matcher) {
         matcher.find();
         String id = matcher.group("id");
-        if (currentUser.getGroupById(id) != null) {
+        if (currentUser.getChannelById(id) != null) {
             return "You're already a member of this channel!";
-        } else if (Messenger.getGroupById(id) == null) {
+        } else if (Messenger.getChannelById(id) == null) {
             return "No channel with this id exists!";
         } else {
-            Group target = Messenger.getGroupById(id);
+            Channel target = Messenger.getChannelById(id);
             target.addMember(currentUser);
-            currentUser.addGroup(target);
+            currentUser.addChannel(target);
             currentUser.addChat(target);
             return "You have successfully joined the channel!";
         }
