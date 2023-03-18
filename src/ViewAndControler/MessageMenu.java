@@ -66,7 +66,7 @@ public class MessageMenu {
                 if (name.equalsIgnoreCase("private chat")) {
                     name = "privateChat";
                 }
-                for (int i = 0; i < currentUser.getChats().size() - 1; i++) {
+                for (int i = 0; i < currentUser.getChats().size(); i++) {
                     Chat currentUserChat = currentUser.getChats().get(i);
                     if (currentUserChat.getClass().getSimpleName().equalsIgnoreCase(name)) {
                         if (currentUserChat.getId().equals(id)) {
