@@ -50,7 +50,7 @@ public class ChatMenu {
         String ans = new String();
         ans += "messages:";
         for (Message message : chat.getMessages()) {
-            String buff = message.getOwner().getName() + "(" + message.getOwner().getId() + "): \"" + message.getContent() + "\"";
+            String buff = "\n"+message.getOwner().getName() + "(" + message.getOwner().getId() + "): \"" + message.getContent() + "\"";
             ans+=buff;
         }
         return ans;
@@ -64,7 +64,7 @@ public class ChatMenu {
         ans += "Members:";
         for (int i = 0; i < chat.getMembers().size(); i++) {
             User member = chat.getMembers().get(i);
-            String buff = "name: " + member.getName() + ", id: " + member.getId();
+            String buff = "\nname: " + member.getName() + ", id: " + member.getId();
             if (chat.getOwner().equals(member)) {
                 buff += " *owner";
             }

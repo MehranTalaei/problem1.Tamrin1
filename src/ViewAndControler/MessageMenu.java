@@ -19,7 +19,7 @@ public class MessageMenu {
     private static Pattern createGropuCommand = Pattern.compile("create new group i (?<id>\\S+)\\s+n\\s+(?<name>\\S+)\\s*");
     private static Pattern startPvCommand = Pattern.compile("start a new private chat with i (?<id>\\S+)");
     private static Pattern logout = Pattern.compile("logout");
-    private static Pattern enterChatCommand = Pattern.compile("enter\\s+(?<chatType>\\S+)\\s+i\\s+(?<id>\\S+)\\s*");
+    private static Pattern enterChatCommand = Pattern.compile("enter\\s+(?<chatType>.+)\\s+i\\s+(?<id>\\S+)\\s*");
     public void run() {
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
@@ -126,12 +126,13 @@ public class MessageMenu {
         String chatType = matcher.group("chatType");
         String id = matcher.group("id");
         boolean flag=true;
+        String bufferChatType = chatType.concat("");
         if (chatType.equalsIgnoreCase("private chat")) {
-            chatType = "privateChat";
+            bufferChatType = "privateChat";
         }
         for (Chat currentUserChat : currentUser.getChats()) {
             if (currentUserChat.getId().equals(id)) {
-                if (currentUserChat.getClass().getSimpleName().equalsIgnoreCase(chatType)) {
+                if (currentUserChat.getClass().getSimpleName().equalsIgnoreCase(bufferChatType)) {
                     flag=false;
                 }
             }
@@ -189,21 +190,24 @@ public class MessageMenu {
         } else {
             User second = Messenger.getUserById(id);
             if (second.equals(currentUser)) {
-                PrivateChat pv = new PrivateChat(currentUser, id, currentUser.getName());/////////
+                PrivateChat pv = new PrivateChat(currentUser, id, currentUser.getName()+"");/////////
                 currentUser.addPrivateChat(pv);
+                currentUser.addChat(pv);
                 pv.addMember(currentUser);
             } else {
                 PrivateChat pv1 = new PrivateChat(currentUser, id, second.getName());
                 PrivateChat pv2 = new PrivateChat(second, currentUser.getId(), currentUser.getName());
-                second.addPrivateChat(pv1);
-                currentUser.addChat(pv2);
+                second.addPrivateChat(pv2);
+                second.addChat(pv2);
+                currentUser.addPrivateChat(pv1);
+                currentUser.addChat(pv1);
                 pv2.addMember(second);
                 pv2.addMember(currentUser);
                 pv1.addMember(currentUser);
                 pv1.addMember(second);
             }
             String name=second.getName();
-            return "Private chat with "+ name +" has been started successfully!";
+            return "Private chat with " + name + " has been started successfully!";
         }
     }
 
