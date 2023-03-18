@@ -10,7 +10,7 @@ public class ChatMenu {
     Chat chat;
     User currentUser;
 
-    private static Pattern sendMessageCommand = Pattern.compile("send a message c (?<message>.+)\\s+");
+    private static Pattern sendMessageCommand = Pattern.compile("send a message c (?<message>.+)");
     private static Pattern addMemberCommand = Pattern.compile("add member i (?<id>\\S+)\\s*");
     private static Pattern showMessagesCommand = Pattern.compile("show all messages");
     private static Pattern showMembersCommand = Pattern.compile("show all members");
@@ -42,6 +42,7 @@ public class ChatMenu {
         }
         else {
             System.out.println("Invalid command!");
+            this.run();
         }
         return;
     }
