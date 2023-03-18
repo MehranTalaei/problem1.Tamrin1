@@ -22,20 +22,25 @@ public class ChatMenu {
         if (command.matches(sendMessageCommand.pattern())) {
             System.out.println(sendMessage(sendMessageCommand.matcher(command)));
             this.run();
-        } else if (command.matches(addMemberCommand.pattern())) {
+        }
+        else if (command.matches(addMemberCommand.pattern())) {
             System.out.println(addMember(addMemberCommand.matcher(command)));
             this.run();
-        } else if (command.matches(showMessagesCommand.pattern())) {
+        }
+        else if (command.matches(showMessagesCommand.pattern())) {
             System.out.println(showMessages());
             this.run();
-        } else if (command.matches(showMembersCommand.pattern())) {
+        }
+        else if (command.matches(showMembersCommand.pattern())) {
             System.out.println(showMembers());
             this.run();
-        } else if (command.matches(back.pattern())) {
+        }
+        else if (command.matches(back.pattern())) {
             MessageMenu messageMenu = new MessageMenu();
             messageMenu.setCurrentUser(currentUser);
             messageMenu.run();
-        } else {
+        }
+        else {
             System.out.println("Invalid command!");
         }
         return;

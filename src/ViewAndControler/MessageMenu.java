@@ -26,26 +26,33 @@ public class MessageMenu {
         if (command.matches(showAllChannelsCommand.pattern())) {
             System.out.println(showAllChannels());
             this.run();
-        } else if (command.matches(createChannelCommand.pattern())) {
+        }
+        else if (command.matches(createChannelCommand.pattern())) {
             System.out.println(createChannel(createChannelCommand.matcher(command)));
             this.run();
-        } else if (command.matches(joinChannelCommand.pattern())) {
+        }
+        else if (command.matches(joinChannelCommand.pattern())) {
             System.out.println(joinChannel(joinChannelCommand.matcher(command)));
             this.run();
-        } else if (command.matches(showChatsCommand.pattern())) {
+        }
+        else if (command.matches(showChatsCommand.pattern())) {
             System.out.println(showChats());
             this.run();
-        } else if (command.matches(createGropuCommand.pattern())) {
+        }
+        else if (command.matches(createGropuCommand.pattern())) {
             System.out.println(createGroup(createGropuCommand.matcher(command)));
             this.run();
-        } else if (command.matches(startPvCommand.pattern())) {
+        }
+        else if (command.matches(startPvCommand.pattern())) {
             System.out.println(createPrivateChat(startPvCommand.matcher(command)));
             this.run();
-        } else if (command.matches(logout.pattern())) {
+        }
+        else if (command.matches(logout.pattern())) {
             System.out.println("Logged out");
             LoginMenu loginMenu = new LoginMenu();
             loginMenu.run();
-        } else if (command.matches(enterChatCommand.pattern())) {
+        }
+        else if (command.matches(enterChatCommand.pattern())) {
             String output=enterChat(enterChatCommand.matcher(command));
             System.out.println(output);
             if (output.matches("You have successfully entered the chat!")) {
@@ -72,7 +79,8 @@ public class MessageMenu {
             } else {
                 this.run();
             }
-        } else {
+        }
+        else {
             System.out.println("Invalid command!");
             this.run();
         }

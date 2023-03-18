@@ -22,10 +22,12 @@ public class LoginMenu {
         String command = scanner.nextLine();
         if (command.matches(exit.pattern())) {
             return;
-        } else if (command.matches(registerCommand.pattern())) {
+        }
+        else if (command.matches(registerCommand.pattern())) {
             System.out.println(register(registerCommand.matcher(command)));
             this.run();
-        } else if (command.matches(loginCommand.pattern())) {
+        }
+        else if (command.matches(loginCommand.pattern())) {
             String output = login(loginCommand.matcher(command));
             System.out.println(output);
             if (output.equals("User successfully logged in!")) {
@@ -39,7 +41,8 @@ public class LoginMenu {
             } else {
                 this.run();
             }
-        } else {
+        }
+        else {
 /*
             Chat chat=new Group(new User("saa","sadf","sfgg"),"dd","adf");
             System.out.println(chat.getClass().getSimpleName().equalsIgnoreCase("group"));
