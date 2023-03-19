@@ -54,10 +54,10 @@ public class MessageMenu {
             String output=enterChat(enterChatCommand.matcher(command));
             System.out.println(output);
             if (output.matches("You have successfully entered the chat!")) {
-                ChatMenu chatMenu=new ChatMenu();
+                ChatMenu chatMenu = new ChatMenu();
                 chatMenu.setCurrentUser(currentUser);
                 //////
-                Matcher mat=enterChatCommand.matcher(command);
+                Matcher mat = enterChatCommand.matcher(command);
                 mat.find();
                 String id = mat.group("id");
                 String name = mat.group("chatType");
@@ -73,11 +73,18 @@ public class MessageMenu {
                     }
                 }
                 //////
-                chatMenu.run(scanner,chatMenu.chat);
+                //System.out.println("entrance: " + chatMenu.currentUser + ", chat:" + chatMenu.chat.getName());
+                chatMenu.run(scanner, chatMenu.chat);
             } else {
                 this.run(scanner);
             }
         }
+//        else if (command.matches("show second blah her")) {
+//            for (Chat chat1 : Messenger.getUserById("2").getChats()) {
+//                System.out.println(chat1.getName() + "  " + chat1.getId());
+//            }
+//            this.run(scanner);
+//        }
         else {
             System.out.println("Invalid command!");
             this.run(scanner);
@@ -112,6 +119,16 @@ public class MessageMenu {
             } else {
                 type = new String();
             }
+/*
+            if (chat instanceof PrivateChat) {
+                PrivateChat pv= ((PrivateChat) chat);
+                String buff="\n"+counter+". "+pv.getPvName(currentUser)+", id: "+pv.getPvId(currentUser)+", "+type;
+                ans+=buff;
+            } else {
+                String buff="\n"+counter+". "+chat.getName()+", id: "+chat.getId()+", "+type;
+                ans+=buff;
+            }
+*/
             String buff="\n"+counter+". "+chat.getName()+", id: "+chat.getId()+", "+type;
             ans+=buff;
             counter++;
@@ -193,16 +210,26 @@ public class MessageMenu {
                 currentUser.addChat(pv);
                 pv.addMember(currentUser);
             } else {
-                PrivateChat pv1 = new PrivateChat(currentUser, id, second.getName());
+
+                PrivateChat pv1 = new PrivateChat(currentUser, second.getId(), second.getName());
                 PrivateChat pv2 = new PrivateChat(second, currentUser.getId(), currentUser.getName());
+                pv2.addMember(second);
+                //pv2.addMember(currentUser);
+                //pv1.addMember(currentUser);
+                pv1.addMember(currentUser);
+
                 second.addPrivateChat(pv2);
                 second.addChat(pv2);
                 currentUser.addPrivateChat(pv1);
                 currentUser.addChat(pv1);
-                pv2.addMember(second);
-                pv2.addMember(currentUser);
-                pv1.addMember(currentUser);
-                pv1.addMember(second);
+
+//                PrivateChat pv = new PrivateChat(currentUser, id, currentUser.getName());
+//                second.addPrivateChat(pv);
+//                currentUser.addPrivateChat(pv);
+//                second.addChat(pv);
+//                currentUser.addChat(pv);
+//                pv.addMember(second);
+//                pv.addMember(second);
             }
             String name=second.getName();
             return "Private chat with " + name + " has been started successfully!";

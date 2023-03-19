@@ -19,6 +19,7 @@ public class User {
 
     public void addChat(Chat chat) {
         chats.add(chat);
+        //System.out.println("i am adding "+chat.getId());
     }
 
     public void addGroup(Group group) {
@@ -69,6 +70,7 @@ public class User {
         chats.remove(chat);
         chats.add(chat);
     }
+
     public String getId() {
         return id;
     }

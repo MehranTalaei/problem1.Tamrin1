@@ -109,6 +109,15 @@ public class ChatMenu {
             return "You don't have access to send a message!";
         } else {
             Message newMessage = new Message(currentUser, MessageContent);
+            if (chat instanceof PrivateChat) {
+                User second = ((PrivateChat) chat).getSecond(currentUser);
+                PrivateChat pv2 = second.getPrivateChatById(currentUser.getId());
+                chat.addMessage(newMessage);
+                if (!second.equals(currentUser)) {
+                    pv2.addMessage(newMessage);
+                }
+                return "Message has been sent successfully!";
+            }
             chat.addMessage(newMessage);
             return "Message has been sent successfully!";
         }
