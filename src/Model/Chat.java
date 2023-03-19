@@ -8,7 +8,7 @@ abstract public class Chat {
     private User owner;
     private String id;
     private String name;
-    private TypeOfChat type;
+    //private TypeOfChat type;
     public Chat(User owner, String id, String name) {
         this.owner = owner;
         this.id = id;

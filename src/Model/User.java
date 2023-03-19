@@ -52,7 +52,7 @@ public class User {
         return null;
     }
 
-    public PrivateChat getChatById(String id) {
+    public PrivateChat getPrivateChatById(String id) {
         for (int i = 0; i < privateChats.size(); i++) {
             if (privateChats.get(i).getId().equals(id)) {
                 return privateChats.get(i);

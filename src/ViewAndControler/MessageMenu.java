@@ -2,8 +2,6 @@ package ViewAndControler;
 
 import Model.*;
 
-import javax.annotation.processing.Messager;
-import javax.lang.model.element.Name;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,37 +18,37 @@ public class MessageMenu {
     private static Pattern startPvCommand = Pattern.compile("start a new private chat with i (?<id>\\S+)");
     private static Pattern logout = Pattern.compile("logout");
     private static Pattern enterChatCommand = Pattern.compile("enter\\s+(?<chatType>.+)\\s+i\\s+(?<id>\\S+)\\s*");
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
+    public void run(Scanner scanner) {
+        //Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
         if (command.matches(showAllChannelsCommand.pattern())) {
             System.out.println(showAllChannels());
-            this.run();
+            this.run(scanner);
         }
         else if (command.matches(createChannelCommand.pattern())) {
             System.out.println(createChannel(createChannelCommand.matcher(command)));
-            this.run();
+            this.run(scanner);
         }
         else if (command.matches(joinChannelCommand.pattern())) {
             System.out.println(joinChannel(joinChannelCommand.matcher(command)));
-            this.run();
+            this.run(scanner);
         }
         else if (command.matches(showChatsCommand.pattern())) {
             System.out.println(showChats());
-            this.run();
+            this.run(scanner);
         }
         else if (command.matches(createGropuCommand.pattern())) {
             System.out.println(createGroup(createGropuCommand.matcher(command)));
-            this.run();
+            this.run(scanner);
         }
         else if (command.matches(startPvCommand.pattern())) {
             System.out.println(createPrivateChat(startPvCommand.matcher(command)));
-            this.run();
+            this.run(scanner);
         }
         else if (command.matches(logout.pattern())) {
             System.out.println("Logged out");
             LoginMenu loginMenu = new LoginMenu();
-            loginMenu.run();
+            loginMenu.run(scanner);
         }
         else if (command.matches(enterChatCommand.pattern())) {
             String output=enterChat(enterChatCommand.matcher(command));
@@ -75,14 +73,14 @@ public class MessageMenu {
                     }
                 }
                 //////
-                chatMenu.run();
+                chatMenu.run(scanner,chatMenu.chat);
             } else {
-                this.run();
+                this.run(scanner);
             }
         }
         else {
             System.out.println("Invalid command!");
-            this.run();
+            this.run(scanner);
         }
         return;
     }
@@ -183,7 +181,7 @@ public class MessageMenu {
     private String createPrivateChat(Matcher matcher) {
         matcher.find();
         String id = matcher.group("id");
-        if (currentUser.getChatById(id) != null) {
+        if (currentUser.getPrivateChatById(id) != null) {
             return "You already have a private chat with this user!";
         } else if (Messenger.getUserById(id) == null) {
             return "No user with this id exists!";

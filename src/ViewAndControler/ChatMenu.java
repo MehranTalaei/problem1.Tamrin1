@@ -16,33 +16,33 @@ public class ChatMenu {
     private static Pattern showMembersCommand = Pattern.compile("show all members");
     private static Pattern back = Pattern.compile("back");
 
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
+    public void run(Scanner scanner,Chat chat) {
+        //Scanner scanner = new Scanner(System.in);
         String command=scanner.nextLine();
         if (command.matches(sendMessageCommand.pattern())) {
             System.out.println(sendMessage(sendMessageCommand.matcher(command)));
-            this.run();
+            this.run(scanner,chat);
         }
         else if (command.matches(addMemberCommand.pattern())) {
             System.out.println(addMember(addMemberCommand.matcher(command)));
-            this.run();
+            this.run(scanner,chat);
         }
         else if (command.matches(showMessagesCommand.pattern())) {
             System.out.println(showMessages());
-            this.run();
+            this.run(scanner,chat);
         }
         else if (command.matches(showMembersCommand.pattern())) {
             System.out.println(showMembers());
-            this.run();
+            this.run(scanner,chat);
         }
         else if (command.matches(back.pattern())) {
             MessageMenu messageMenu = new MessageMenu();
             messageMenu.setCurrentUser(currentUser);
-            messageMenu.run();
+            messageMenu.run(scanner);
         }
         else {
             System.out.println("Invalid command!");
-            this.run();
+            this.run(scanner,chat);
         }
         return;
     }

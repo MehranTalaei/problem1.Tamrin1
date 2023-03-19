@@ -10,7 +10,7 @@ public class LoginMenu {
     static Pattern loginCommand = Pattern.compile("\\s*login\\s+i\\s+(?<id>\\S+)\\s+p\\s+(?<password>\\S+)\\s*");
     static Pattern registerCommand = Pattern.compile("\\s*register\\s+i\\s+(?<id>\\S+)\\s+u\\s+(?<username>\\S+)\\s+p\\s+(?<password>\\S+)\\s*");
     static Pattern exit = Pattern.compile("\\s*exit\\s*");
-    public void run() {
+    public void run(Scanner scanner) {
 /*
         Commands login = new Commands("login\\s+i\\s+(?<id>\\S+)\\s+p\\s+(?<password>\\w+)");
         Matcher hell = login.getMatcher("login i 234 p afkja");
@@ -18,14 +18,14 @@ public class LoginMenu {
         System.out.println(hell.matches());
         System.out.println(hell.group("password"));
 */
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
         if (command.matches(exit.pattern())) {
             return;
         }
         else if (command.matches(registerCommand.pattern())) {
             System.out.println(register(registerCommand.matcher(command)));
-            this.run();
+            this.run(scanner);
         }
         else if (command.matches(loginCommand.pattern())) {
             String output = login(loginCommand.matcher(command));
@@ -37,9 +37,9 @@ public class LoginMenu {
                 String id = mat.group("id");
                 User current = Messenger.getUserById(id);
                 messageMenu.setCurrentUser(current);
-                messageMenu.run();
+                messageMenu.run(scanner);
             } else {
-                this.run();
+                this.run(scanner);
             }
         }
         else {
@@ -48,7 +48,7 @@ public class LoginMenu {
             System.out.println(chat.getClass().getSimpleName().equalsIgnoreCase("group"));
 */
             System.out.println("Invalid command!");
-            this.run();
+            this.run(scanner);
         }
         return;
     }
