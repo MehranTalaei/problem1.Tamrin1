@@ -1,11 +1,11 @@
-import ViewAndControler.LoginMenu;
+import View.RegisterMenu;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        LoginMenu loginMenu=new LoginMenu();
         Scanner scanner = new Scanner(System.in);
-        loginMenu.run(scanner);
+        RegisterMenu registerMenu=new RegisterMenu();
+        registerMenu.run(scanner);
     }
 }
